@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Installation_Sequence__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The installation sequence to which this package install belongs</description>
+    <externalId>false</externalId>
+    <label>Installation Sequence</label>
+    <referenceTo>Installation_Sequence__c</referenceTo>
+    <relationshipLabel>Package Definitions</relationshipLabel>
+    <relationshipName>Package_Definitions</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

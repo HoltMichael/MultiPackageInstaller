@@ -1,0 +1,36 @@
+<template>
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="utility:package"></lightning-icon>
+                </div>
+                <div class="slds-card__header-title slds-card__header-link slds-truncate" title={marginTitle}>
+                    <span>Multi-Package Installer</span>
+                </div>
+            </header>
+        </div>
+        <div>
+            <template if:false={sequenceId}>
+                <div class="slds-p-bottom_medium">
+                    <lightning-button variant="brand" label="New Install Sequence" title="New Install Sequence" onclick={handleCreateNewSequence} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Load Install Sequence" title="Load Install Sequence" onclick={handleLoadSequence} class="slds-m-left_x-small"></lightning-button>
+                </div>
+            </template>
+            <template if:true={showNewSequenceModal}>
+                <c-record-create object-api-name="MHolt__Installation_Sequence__c" object-name="Installation Sequence" onsuccess={handleNewSequence} oncancel={handleCloseModals}></c-record-create>
+            </template>
+            <template if:true={sequenceId}>
+                <c-installation-sequence-canvas></c-installation-sequence-canvas>
+            </template>
+        </div>
+        <template if:true={sequenceId}>
+            <div>
+                <footer class="slds-card__footer">
+                    <lightning-button variant="brand" label="Save" title="Save" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button variant="brand" label="Back" title="Back" onclick={handleBack} class="slds-m-left_x-small"></lightning-button>
+                </footer>
+            </div>
+        </template>
+    </article>
+</template>

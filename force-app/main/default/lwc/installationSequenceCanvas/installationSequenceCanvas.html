@@ -1,0 +1,25 @@
+<template>
+    <div class="slds-grid slds-size_1-of-1 slds-p-left_x-small">
+        <lightning-button variant="brand" label="Add Package" title="Add Package" onclick={handleAddPackage} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="brand" label="Add Install Phase" title="Add Install Phase" onclick={addColumn} class="slds-m-left_x-small"></lightning-button>
+    </div>
+    <div class="slds-grid slds-p-around_medium">
+        <template if:true={columns} for:each={columns} for:item="column">
+            <div key={column.id} ondrop={handleOndrop} ondragleave={handleOndragleave} data-column={column.id} data-id={item} ondragstart={handleOndragstart} ondragover={handleOndragover}>
+                <div style="background-color:lightblue;color:white;border:1px solid black;">
+                    <p>Phase {column.id} </p>
+                </div>
+                <div class="slds-scrollable">
+                    <template for:each={column.items} for:item="item">
+                        <div key={item} style="width:100px;height:100px;border:1px dotted black;background-color:white;transition: 0.3s cubic-bezier(0.2, 1, 0.1, 1);" data-column={column.id} data-id={item.id} draggable="true" ondragstart={handleOndragstart} ondragover={handleOndragover} ondragenter={handleOndragenter} >
+                            <c-package definition-id={item.id} namespace={item.name} version={item.version} password={item.password} col={item.col}></c-package>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+        <template if:true={showNewPackageModal}>
+            <c-record-create object-api-name="MHolt__Package_Definition__c" object-name="Package Definition" onsuccess={handleCreateNewPackage} oncancel={handleCloseModals}></c-record-create>
+        </template>
+    </div>
+  </template>
